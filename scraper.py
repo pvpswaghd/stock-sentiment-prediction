@@ -1,3 +1,4 @@
+import yfinance as yf
 import time
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
@@ -39,12 +40,13 @@ def scrape(url, samples=5):
 
     # Randomly select 5 articles as samples
     chosen = []
-    for i in range(samples):
+    # for i in range(samples):
+    for i in range(len(urls)-1):
         if len(urls) <= i: break
         luckyNumber = random.randint(0, len(urls) - 1)
         while luckyNumber in chosen: luckyNumber = random.randint(0, len(urls) - 1)
         newUrl = urls[i]
-        time.sleep(2.0 + random.random())
+        time.sleep(10.0 + random.random())
         newSoup = js_requests(newUrl)
         # Scrape the article page
         try:
@@ -52,17 +54,19 @@ def scrape(url, samples=5):
             article = ""
             for p in newSoup.find_all('p', class_="text__text__1FZLe text__dark-grey__3Ml43 text__regular__2N1Xr text__small__1kGq2 body__full_width__ekUdw body__small_body__2vQyf article-body__paragraph__2-BtD"):
                 article += p.text
+            print(i, title.text)
             res.append([title.text, article])
+            chosen.append(luckyNumber)
         except:
             i -= 1
             continue
 
     return res
 
-# res = scrape("tesla", 5)
-# for i in res:
-#     print("Topic:")
-#     print(i[0])
-#     print("Article: ")
-#     for j in i[1].split(". "): print(j)
-#     print()
+res = scrape("tesla", 10)
+for i in res:
+    print("Topic:")
+    print(i[0])
+    print("Article: ")
+    for j in i[1].split(". "): print(j)
+    print()
