@@ -27,6 +27,7 @@ def scrape(url, samples=5):
     urls = []
     # 2d array of [[title, article], ...]
     res = []
+    url = "https://www.reuters.com/site-search/?query=" + url
     soup = js_requests(url)
 
     links = soup.find_all('a', class_="text__text__1FZLe text__dark-grey__3Ml43 text__inherit-font__1Y8w3 text__inherit-size__1DZJi link__underline_on_hover__2zGL4 media-story-card__heading__eqhp9")
@@ -59,4 +60,10 @@ def scrape(url, samples=5):
 
     return res
 
-# res = scrape("https://www.reuters.com/site-search/?query=tesla", 5)
+# res = scrape("tesla", 5)
+# for i in res:
+#     print("Topic:")
+#     print(i[0])
+#     print("Article: ")
+#     for j in i[1].split(". "): print(j)
+#     print()
