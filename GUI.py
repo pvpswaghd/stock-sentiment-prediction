@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 # Build of the SIDEBAR
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
-st.sidebar.header("Stock Trend Prediction")
+st.sidebar.header("Stock Opening Price Change Prediction")
 
 st.sidebar.subheader("Feature Selections")
 stockName = st.sidebar.selectbox(
@@ -59,7 +59,7 @@ diff2 = round(
 )
 
 
-st.header(str(stockName) + " - " + "Stock Market Prediction")
+st.header(str(stockName) + " - " + "Stock Market Opening Price Change")
 col1, col2, col3 = st.columns(3)
 col1.metric("Date", dateStr, "")
 col2.metric("Predicted Price (USD)", "$" + str(predictCurrPrice), diff1)
